@@ -2,7 +2,7 @@ import { InputContainer, ErrorMessage } from "./styles";
 import { IInputProps } from "././types";
 import { Controller } from "react-hook-form";
 
-const Input = ({ control, name, errorMessage, ...rest }: IInputProps) => {
+export function Input({ control, name, errorMessage, ...rest }: IInputProps){
   return (
     <>
       <InputContainer>
@@ -24,5 +24,3 @@ const Input = ({ control, name, errorMessage, ...rest }: IInputProps) => {
     </>
   );
 };
-
-export default Input;

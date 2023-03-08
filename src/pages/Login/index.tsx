@@ -1,10 +1,10 @@
+import * as S from "./styles";
 import { useForm } from "react-hook-form";
-import Button from "../../components/Button";
-import Input from "../../components/Input";
+import { Button } from "../../components/Button";
+import { Input } from "../../components/Input";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import { Container, LoginContainer, Column, Spacing, Title } from "./styles";
 import { defaultValues, IFormLogin } from "./types";
 
 const schema = yup
@@ -18,29 +18,30 @@ const schema = yup
   .required();
 
 const Login = () => {
-  const {
-    control,
-    formState: { errors, isValid },
-  } = useForm<IFormLogin>({
+  const { control, formState: { errors, isValid }} = useForm<IFormLogin>({
     resolver: yupResolver(schema),
     mode: "onBlur",
     defaultValues,
     reValidateMode: "onChange",
   });
 
+  function onSubmit(){
+    console.log("Login realizado")
+  }
+
   return (
-    <Container>
-      <LoginContainer>
-        <Column>
-          <Title>Login</Title>
-          <Spacing />
+    <S.Container>
+      <S.LoginContainer>
+        <S.Column>
+          <S.Title>Login</S.Title>
+          <S.Spacing />
           <Input
             name="email"
             placeholder="Email"
             control={control}
             errorMessage={errors?.email?.message}
           />
-          <Spacing />
+          <S.Spacing />
           <Input
             name="password"
             type="password"
@@ -48,11 +49,15 @@ const Login = () => {
             control={control}
             errorMessage={errors?.password?.message}
           />
-          <Spacing />
-          <Button title="Entrar" />
-        </Column>
-      </LoginContainer>
-    </Container>
+          <S.Spacing />
+          {isValid === true ? (
+            <Button title="Entrar" onClick={onSubmit} disabled={false} />
+          ): (
+            <Button className="disabled" title="Entrar" onClick={onSubmit} disabled={true} />
+          )}
+        </S.Column>
+      </S.LoginContainer>
+    </S.Container>
   );
 };
 

@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-
-
 export const Container = styled.div`
     width: 100%; 
     height: 100vh;
@@ -9,6 +7,10 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    .disabled:disabled{
+        filter: opacity(0.6);
+    }
 `
 
 export const LoginContainer = styled.div`
